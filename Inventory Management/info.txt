@@ -1,0 +1,68 @@
+**InventoryIteam.java**
+public class InventoryItem: This line declares a public class named InventoryItem.
+Private Attributes: We've defined private instance variables to store the details of each inventory item. 
+Using private ensures that the data within each InventoryItem object can only be accessed or modified
+through the methods we provide (getters and setters), promoting encapsulation.
+Constructor: The constructor public InventoryItem(...) is used to create new InventoryItem objects,
+initializing their attributes with the provided values.
+Getters and Setters: For each attribute, we have a getter method (e.g., getProductID()) to
+retrieve its value and a setter method (e.g., setProductID(String productID)) to modify its value.
+toString() Method: This method is overridden to provide a human-readable string representation
+of an InventoryItem object. This will be useful for debugging and displaying information.
+
+**InventoryManager.java**
+CSV_FILE_PATH and CSV_HEADER: These constants define the location and the header format of our CSV file.
+loadInventory():
+Creates an empty ArrayList to store InventoryItem objects.
+Uses a BufferedReader to efficiently read the CSV file line by line.
+Skips the first line (header).
+Splits each line by the comma delimiter.
+Parses the data into the appropriate data types (String, int, double).
+Creates a new InventoryItem object and adds it to the inventory list.
+Includes basic error handling for IOException (file reading issues) and
+NumberFormatException (if the quantity or price are not valid numbers).
+saveInventory(List<InventoryItem> inventory):
+Uses a FileWriter to write to the CSV file.
+Writes the header row first.
+Iterates through the provided list of InventoryItem objects.
+Formats the data of each item into a comma-separated string using String.format().
+Writes each formatted string as a new line in the CSV file.
+Includes error handling for IOException.
+
+**InventoryApp**
+InventoryApp extends JFrame: Our main application class inherits from JFrame,
+which is the base class for creating windows in Swing.
+inventoryManager and inventoryList: These instance variables hold the
+InventoryManager object and the list of InventoryItem objects loaded from the CSV.
+Constructor (InventoryApp()):
+Creates an instance of InventoryManager.
+Loads the inventory data using inventoryManager.loadInventory().
+Sets up the basic properties of the main window (title, close operation, size, centering).
+Calls setupGUI() to initialize the graphical components.
+Adds a WindowListener to automatically save the inventory data when the application is closed.
+setupGUI(): This method is currently a placeholder. We've initialized a JPanel with CardLayout,
+which is useful for switching between different "pages" or panels in our application.
+We've also added a temporary label for the "Inventory List Page."
+main() method: The entry point of the application, which uses SwingUtilities.invokeLater() to ensure
+that the GUI is created and updated on the Event Dispatch Thread (EDT), which is crucial for thread
+safety in Swing.
+Methods for Inventory Management: Basic methods like addItem, updateItem, deleteItem, getInventoryList,
+checkLowStock, and checkOutOfStock are included. These will be connected to the GUI elements later.
+
+tableModel and inventoryTable: Instance variables to hold the table model and the JTable component.
+mainPanel and cardLayout: Used for managing different pages (currently only one).
+setupInventoryListPage():
+Creates a JPanel with BorderLayout.
+Defines the column names for the table.
+Creates a 2D Object[][] array to hold the inventory data from inventoryList.
+Creates a DefaultTableModel with the data and column names.
+Creates a JTable using the tableModel.
+Embeds the JTable in a JScrollPane to handle scrolling.
+Creates a JPanel for the buttons ("Add New Item," "Edit Selected Item," "Delete Selected Item")
+using FlowLayout.
+Adds the scroll pane and the buttons panel to the inventoryListPage.
+Adds the inventoryListPage to the mainPanel with the name "InventoryList" and
+shows this page initially using cardLayout.show().
+addItem(), updateItem(), deleteItem(): These methods are now updated to also
+reflect the changes in the tableModel so that the JTable is updated when the inventory data changes.
+

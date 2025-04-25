@@ -1,0 +1,4 @@
+ProductID,ProductName,Quantity,Price,Category
+A1,Table Fan,13,989.00,Electronics
+A2,AC,3,14999.00,Electronics
+A3,TV,0,40000.00,Electronics
